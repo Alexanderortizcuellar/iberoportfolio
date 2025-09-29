@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Contact — Alexander Ortiz</title>
+    <meta
+      name="description"
+      content="Contact Alexander Ortiz — Data Science student & developer."
+    />
+    <style>
+      :root {
+        --bg: #0f1724;
+        --card: #0b1a2a;
+        --muted: #9aa7b2;
+        --accent: #6ee7b7;
+        --glass: rgba(255, 255, 255, 0.03);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, Segoe UI, Roboto, Arial;
+        background: linear-gradient(180deg, #071428 0%, var(--bg) 100%);
+        color: #e6eef6;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+      }
+      .container {
+        max-width: 1100px;
+        width: 100%;
+        padding: 28px;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .logo {
+        width: 44px;
+        height: 44px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, var(--accent), #60a5fa);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        color: #052026;
+      }
+      nav {
+        display: flex;
+        gap: 12px;
+      }
+      nav a {
+        color: var(--muted);
+        text-decoration: none;
+        padding: 8px;
+        border-radius: 8px;
+      }
+      nav a:hover,
+      nav a.active {
+        background: rgba(255, 255, 255, 0.04);
+        color: #fff;
+      }
+
+      /* mobile nav hidden by default */
+      .mobile-nav {
+        display: none;
+      }
+      .menu-toggle {
+        display: none;
+        background: none;
+        border: 0;
+        color: var(--muted);
+        font-size: 20px;
+      }
+
+      main {
+        display: grid;
+        grid-template-columns: 1fr 380px;
+        gap: 24px;
+        margin-top: 28px;
+      }
+      .card {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          rgba(255, 255, 255, 0.01)
+        );
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+        backdrop-filter: blur(4px);
+      }
+
+      h1 {
+        margin: 0 0 8px 0;
+        font-size: 26px;
+      }
+      .muted {
+        color: var(--muted);
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        animation: slideIn 520ms cubic-bezier(0.2, 0.9, 0.23, 1);
+      }
+      label {
+        font-size: 13px;
+      }
+      input[type="text"],
+      input[type="email"],
+      textarea {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        background: transparent;
+        color: inherit;
+        font-size: 14px;
+        transition: transform 180ms ease, box-shadow 180ms ease;
+      }
+      input:focus,
+      textarea:focus {
+        outline: none;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 22px rgba(6, 12, 22, 0.6);
+      }
+      textarea {
+        min-height: 140px;
+        resize: vertical;
+      }
+
+      .row {
+        display: flex;
+        gap: 12px;
+      }
+      .row > * {
+        flex: 1;
+      }
+
+      .hint {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .actions {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .btn {
+        padding: 10px 14px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 700;
+        border: 0;
+        cursor: pointer;
+      }
+      .btn.primary {
+        background: var(--accent);
+        color: #03201a;
+      }
+      .btn.ghost {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        color: var(--muted);
+      }
+
+      .side-card {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .contact-item {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+      }
+
+      .socials {
+        display: flex;
+        gap: 8px;
+      }
+      .chip {
+        padding: 8px 10px;
+        border-radius: 999px;
+        background: var(--glass);
+        font-size: 13px;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .notice {
+        padding: 10px;
+        border-radius: 10px;
+        background: rgba(110, 231, 183, 0.08);
+        color: var(--accent);
+        border: 1px solid rgba(110, 231, 183, 0.12);
+        display: none;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      /* subtle link hover underline animation */
+      a.underline {
+        position: relative;
+        color: var(--muted);
+        text-decoration: none;
+      }
+      a.underline::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 100%;
+        bottom: -2px;
+        height: 2px;
+        background: var(--accent);
+        transition: right 0.26s ease;
+      }
+      a.underline:hover::after {
+        right: 0;
+      }
+
+      @media (max-width: 920px) {
+        main {
+          grid-template-columns: 1fr;
+        }
+        nav {
+          display: none;
+        }
+        .menu-toggle {
+          display: inline-block;
+        }
+        .mobile-nav.open {
+          display: block;
+          margin-top: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="brand">
+          <div class="logo">AO</div>
+          <div>
+            <div style="font-weight: 700">Alexander Ortiz</div>
+            <div style="font-size: 12px; color: var(--muted)">
+              Data Science · Developer · Chess
+            </div>
+          </div>
+        </div>
+        <div>
+          <button
+            class="menu-toggle"
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+          >
+            ☰
+          </button>
+          <nav>
+            <a href="/">Home</a>
+            <a href="about.html">About</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="contact.html" class="active">Contact</a>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <section class="card">
+          <h1>Contact me</h1>
+          <p class="muted">
+            Have a question about a project, collaboration, or want to say hi?
+            Send a message below — I usually reply within a few business days.
+          </p>
+
+          <form id="contactForm" novalidate>
+            <div class="row">
+              <div>
+                <label for="name">Full name</label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  aria-required="true"
+                  placeholder="Your full name"
+                />
+              </div>
+              <div>
+                <label for="email">Email</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  aria-required="true"
+                  placeholder="you@domain.com"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label for="subject">Subject</label>
+              <input
+                id="subject"
+                name="subject"
+                type="text"
+                required
+                placeholder="Short subject"
+              />
+            </div>
+
+            <div>
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                placeholder="Tell me about your project or question..."
+              ></textarea>
+            </div>
+
+            <div class="hint">
+              By sending this message you consent to have your details used only
+              for contacting you back. No spam.
+            </div>
+
+            <div class="actions">
+              <button type="submit" class="btn primary">Send message</button>
+              <button type="button" id="clearBtn" class="btn ghost">
+                Clear
+              </button>
+              <div class="notice" role="status" id="notice">
+                Message sent. Thank you!
+              </div>
+            </div>
+
+            <div style="margin-top: 8px; font-size: 13px; color: var(--muted)">
+              If this form doesn't work, email me directly at
+              <a class="underline" href="mailto:alexander.ortiz2@outlook.com"
+                >alexander.ortiz2@outlook.com</a
+              >
+            </div>
+
+            <!--
+            Integration notes:
+            - To actually receive messages you can use: Formspree (https://formspree.io), Netlify Forms, or another form backend.
+            - Example Formspree: set form action to https://formspree.io/f/<your-id> method="POST" and remove the JS send simulation.
+            - For Netlify Forms: add data-netlify="true" to the form and a hidden input name="form-name" value="Contact".
+          --></form>
+        </section>
+
+        <aside class="side-card">
+          <div class="card">
+            <h3 style="margin-top: 0">Direct contact</h3>
+            <div class="contact-item">
+              <div class="chip">✉️</div>
+              <div>
+                <div style="font-weight: 700">Email</div>
+                <div class="muted">alexander.ortiz2@outlook.com</div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="chip">📞</div>
+              <div>
+                <div style="font-weight: 700">Phone</div>
+                <div class="muted">+57 315 572 4894</div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="chip">📍</div>
+              <div>
+                <div style="font-weight: 700">Location</div>
+                <div class="muted">Bogotá, Colombia</div>
+              </div>
+            </div>
+
+            <hr
+              style="margin: 12px 0; border-color: rgba(255, 255, 255, 0.03)"
+            />
+
+            <div>
+              <h4 style="margin: 4px 0">Social</h4>
+              <div class="socials muted">
+                <a
+                  class="underline"
+                  href="https://github.com/alexanderortizcuellar"
+                  target="_blank"
+                  >GitHub</a
+                >
+                <a
+                  class="underline"
+                  href="https://www.linkedin.com/in/alexander-ortiz-cuellar-52b892219"
+                  target="_blank"
+                  >LinkedIn</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4 style="margin-top: 0">Availability</h4>
+            <p class="muted">
+              I typically respond Mon–Fri during business hours (Bogotá time).
+              For urgent requests include "URGENT" at the start of the subject.
+            </p>
+          </div>
+        </aside>
+      </main>
+
+      <footer style="margin-top: 28px; color: var(--muted)">
+        © <span id="year"></span> Alexander Ortiz — Built with HTML & CSS.
+      </footer>
+    </div>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      const form = document.getElementById("contactForm");
+      const notice = document.getElementById("notice");
+      const clearBtn = document.getElementById("clearBtn");
+
+      // Simple client-side validation & UX. This simulates sending so you can test on GitHub Pages.
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        // basic validity check
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        // show sending state
+        const submit = form.querySelector('button[type="submit"]');
+        submit.disabled = true;
+        submit.textContent = "Sending...";
+
+        // Simulate network delay then show success message
+        setTimeout(() => {
+          submit.disabled = false;
+          submit.textContent = "Send message";
+          notice.style.display = "block";
+          // reset after a short delay
+          setTimeout(() => {
+            notice.style.display = "none";
+            form.reset();
+          }, 2200);
+        }, 900);
+
+        // If you wire to Formspree/Netlify, instead of simulating, submit the form normally or use fetch.
+      });
+
+      clearBtn.addEventListener("click", () => {
+        form.reset();
+      });
+
+      // create mobile nav + toggle behaviour (same as index/about)
+      const toggle = document.querySelector(".menu-toggle");
+      const mobileNav = document.createElement("div");
+      mobileNav.id = "mobile-nav";
+      mobileNav.className = "mobile-nav";
+      mobileNav.innerHTML = `
+      <nav style="display:flex;flex-direction:column;gap:8px">
+        <a href="/">Home</a>
+        <a href="about.html">About</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    `;
+      document
+        .querySelector(".container")
+        .insertBefore(mobileNav, document.querySelector("main"));
+
+      toggle.addEventListener("click", () => {
+        const open = mobileNav.classList.toggle("open");
+        toggle.setAttribute("aria-expanded", String(open));
+      });
+
+      // highlight current link
+      function highlightLinks() {
+        const links = document.querySelectorAll("nav a");
+        links.forEach((a) => {
+          try {
+            const href = a.getAttribute("href");
+            if (
+              (href === "/" &&
+                (location.pathname === "/" ||
+                  location.pathname.endsWith("/index.html"))) ||
+              location.pathname.endsWith(href)
+            ) {
+              a.classList.add("active");
+            } else {
+              a.classList.remove("active");
+            }
+          } catch (e) {}
+        });
+      }
+      highlightLinks();
+    </script>
+  </body>
+</html>
