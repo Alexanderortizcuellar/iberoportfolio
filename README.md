@@ -15,21 +15,3 @@ Replace `<your-username>` and `<repo-name>` accordingly.
 ├─ contact.html # Contact form (client-side simulation)
 ├─ assets/ # CSS, JS, images (if present)
 └─ README.md
-
-
-## How to add a new project (gallery)
-There are two easy ways:
-
-**A — Centralized (recommended)**
-Open `gallery.html` and in the `projects` array add an object:
-```js
-projects.push({
-  name: "New Project",
-  summary: "Short description",
-  highlights: ["Highlight 1", "Highlight 2"],
-  stack: ["Python","Flask"],
-  featured: false,
-  repo_url: "https://github.com/...",
-  live_url: "https://..."
-});
-
